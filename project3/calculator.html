@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Calculator</title>
+        <style>
+
+            .topi{
+                text-align:  center;
+                background-color: azure;
+
+            }
+            .contain{
+                text-align: center;
+                margin-top: 5%;
+                background-color: antiquewhite;
+                margin-right:31%;
+                margin-left:31%;
+            }
+            #t1{
+                padding-block: 10px;
+                padding-left: 20%;
+                padding-bottom: -30%;
+                font-size: 20px;
+                
+                
+            }
+            .buttons{
+               padding-block: 40px;
+
+            }
+            #one,#two,#three,#plus,#four,#five,#six,#minus,#seven,#eight,#nine,#multi,#point,#zero,#eql,#div{
+               font-size: 20px;
+               padding-top:3%;
+               padding-left: 5%;
+               padding-right: 5%;
+               padding-bottom: 3%;
+               
+              
+
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <div class="topi"><h1 id="topic">CALCULATOR</h1></div>
+        <div class="contain">
+        <br><br>
+        <div class="screen">
+            <textarea id="t1">0</textarea>
+            <img src="resume.png" width="20" onclick="fun2()">
+        </div>
+
+        <div class="buttons">
+            <span>
+                <input type="button" class="button" id="one" value="1" onclick="fun(1)">
+                <input type="button" class="button" id="two" value="2" onclick="fun(2)">
+                <input type="button" class="button" id="three" value="3" onclick="fun(3)">
+                <input type="button" class="button" id="plus" value="+" onclick="fun('+')">
+
+            </span>
+            <br><br>
+            <span>
+                <input type="button" class="button" id="four" value="4" onclick="fun(4)">
+                <input type="button" class="button" id="five" value="5" onclick="fun(5)">
+                <input type="button" class="button" id="six" value="6" onclick="fun(6)">
+                <input type="button" class="button" id="minus" value="-" onclick="fun('-')">
+
+            </span>
+            <br><br>
+            <span>
+                <input type="button" class="button" id="seven" value="7" onclick="fun(7)">
+                <input type="button" class="button" id="eight" value="8" onclick="fun(8)">
+                <input type="button" class="button" id="nine" value="9" onclick="fun(9)">
+                <input type="button" class="button" id="multi" value="*" onclick="fun('*')">
+            </span>
+            <br><br>
+            <span>
+                <input type="button" class="button" id="point" value="." onclick="fun('.')">
+                <input type="button" class="button" id="zero" value="0" onclick="fun(0)">
+                <input type="button" class="button" id="eql" value="=" onclick="fun1('=')">
+                <input type="button" class="button" id="div" value="/" onclick="fun('/')">
+
+            </span>
+
+
+        </div>
+    </div>
+
+    <script>
+        function fun(val){
+
+            if(val!="="){
+                
+                let p=document.getElementById("t1").innerHTML;
+                if(p=="0"){
+                    document.getElementById("t1").innerHTML=val;
+
+                }
+                else{
+                    document.getElementById("t1").innerHTML+=val;
+                }
+              
+            }
+        }
+
+        function fun1(v1){
+            let p=document.getElementById("t1").innerHTML;
+            document.getElementById("t1").innerHTML=eval(p).toFixed(4);
+
+        }
+        function fun2(){
+            document.getElementById("t1").innerHTML=0;
+        }
+
+    </script>
+
+
+    </body>
+</html>
