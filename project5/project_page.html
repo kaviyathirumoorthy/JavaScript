@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+
+    <title>project_page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        #box1{
+            background-color: black;
+            width:1530px;
+            height:100px;
+            align-content: center;
+           
+        }
+      
+        
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .frame{
+            padding-left: 24%;
+            
+        }
+        h1{
+          color: aliceblue;
+          padding-left: 40%;
+          padding-top: 3%;
+          font-style: inherit;
+
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+       
+</head>
+<body>
+
+    <div id="box1">
+        <h1>PROJECTS</h1>
+    </div>
+    
+    <div id="res" class="frame"></div>
+
+    <div class="container">
+    <p>Enter Username:</p>
+    <input id="username"><br>
+    <p>Enter Password</p>
+    <input id="pswrd" type="password"><br>
+    <p>Enter the link to be attached:</p>
+    <input id="link"> 
+    <br><br>
+    <button onclick="fun()">add</button>
+    <button onclick="fun1()">Clear</button>
+    </div>
+    
+    
+
+    <script>
+
+      
+        var div=document.getElementById("res")
+        function appends(link){
+            var h1=document.createElement("iframe");
+            h1.setAttribute("src",link);
+            h1.setAttribute("height","400px");
+            h1.setAttribute("width","800px");
+            div.append(h1);
+
+        }
+        function check(){
+            let userN=document.getElementById("username");
+            let psw=document.getElementById("pswrd");
+            if(userN.value=="Kaviya@2003" && psw.value=="Secret"){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+        }
+        function fun(){
+        
+           
+           
+            if(check()){
+            var linkey=document.getElementById("link");
+            var val=linkey.value;
+            
+            var storedLinks = JSON.parse(localStorage.getItem("storedLinks")) || [];
+            storedLinks.push(val);
+            localStorage.setItem("storedLinks", JSON.stringify(storedLinks));
+            appends(val);
+            }
+            else{
+                alert("enter correct authentication details for appending frames");
+            }
+        }
+
+        window.onload = function () {
+                
+                var storedLink = JSON.parse(localStorage.getItem("storedLinks")) || [];
+                storedLink.forEach(function(link) {
+                appends(link);
+            });
+        };
+
+        function displayStoredLinks() {
+            var sl = JSON.parse(localStorage.getItem("storedLinks")) || [];
+
+            div.innerHTML = "";
+
+            sl.forEach(function(link) {
+                appends(link);
+            });
+        }
+
+        function fun1(){
+            
+            if(check()){
+            let res=confirm("Are you sure to clear all the data")
+            if(res){
+                localStorage.clear();
+                displayStoredLinks();
+            }
+            }
+        }
+        
+
+    </script>
+
+</body>
+
+
+</html>
