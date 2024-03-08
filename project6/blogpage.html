@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Blog Section</title>
+    <link rel="stylesheet" href="C:\Users\KAVIYA\blogpage\blog1.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section id="blog">
+        <div class="blog-heading">
+            <h1>My Blog</h1>
+            <button onclick="addNewPost()">Add New Post</button>
+        </div>
+
+        <div id="blog-posts-container"></div>
+
+        <script>
+            function toggleContent(contentId) {
+                var content = document.getElementById(contentId);
+                content.style.display = (content.style.display === 'none' || content.style.display === '') ? 'block' : 'none';
+            }
+
+            function addNewPost(){
+                var newArticle = document.createElement('article');
+                newArticle.className = 'blog-container';
+
+                var date = prompt('Enter post date:');
+                var titlee = prompt('Enter blog title:');
+                var summary = prompt('Enter blog summary:');
+                var link = prompt('Enter valid link of image:');
+                var full_content = prompt('Enter full content:');
+
+                var newImg = document.createElement('img');
+                newImg.src = link;
+                newImg.alt = 'Blog';
+
+                var newText = document.createElement('div');
+                newText.className = 'blog-text';
+
+                var newTime = document.createElement('time');
+                newTime.datetime = date;
+                newTime.textContent = date;
+
+                var newTitle = document.createElement('a');
+                newTitle.href = '#';
+                newTitle.className = 'blog-title';
+                newTitle.textContent = titlee;
+
+                var newSummary = document.createElement('p');
+                newSummary.textContent = summary;
+
+                var fullcontent = document.createElement('div');
+                fullcontent.id = 'blog-content-' + (document.getElementsByClassName('blog-container').length + 1);
+                fullcontent.className = 'full-content';
+
+                var para = document.createElement('p');
+                para.textContent = full_content;
+
+                newText.appendChild(newImg);
+                newText.appendChild(newTime);
+                newText.appendChild(newTitle);
+                newText.appendChild(newSummary);
+                newText.appendChild(fullcontent);
+
+                newArticle.appendChild(newText);
+                fullcontent.appendChild(para);
+
+                var blogContainer = document.getElementById('blog-posts-container');
+                blogContainer.appendChild(newArticle);
+
+                
+                storeBlogPost(newArticle.outerHTML);
+            }
+
+            function storeBlogPost(blogHTML) {
+               
+                var storedBlogPosts = localStorage.getItem('blogPosts');
+                var blogPosts = storedBlogPosts ? JSON.parse(storedBlogPosts) : [];
+
+                
+                blogPosts.push(blogHTML);
+
+                
+                localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+            }
+
+            function displayStoredBlogPosts() {
+                var storedBlogPosts = localStorage.getItem('blogPosts');
+                var blogPosts = storedBlogPosts ? JSON.parse(storedBlogPosts) : [];
+
+                
+                blogPosts.forEach(function (blogHTML) {
+                    var blogContainer = document.getElementById('blog-posts-container');
+                    var tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = blogHTML;
+                    blogContainer.appendChild(tempDiv.firstChild);
+                });
+            }
+
+            
+            window.onload = displayStoredBlogPosts;
+        </script>
+    </section>
+</body>
+</html>
